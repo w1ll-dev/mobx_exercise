@@ -9,31 +9,58 @@ part of 'controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$Controller on ControllerBase, Store {
-  final _$counterAtom = Atom(name: 'ControllerBase.counter');
+  final _$nameAtom = Atom(name: 'ControllerBase.name');
 
   @override
-  int get counter {
-    _$counterAtom.context.enforceReadPolicy(_$counterAtom);
-    _$counterAtom.reportObserved();
-    return super.counter;
+  String get name {
+    _$nameAtom.context.enforceReadPolicy(_$nameAtom);
+    _$nameAtom.reportObserved();
+    return super.name;
   }
 
   @override
-  set counter(int value) {
-    _$counterAtom.context.conditionallyRunInAction(() {
-      super.counter = value;
-      _$counterAtom.reportChanged();
-    }, _$counterAtom, name: '${_$counterAtom.name}_set');
+  set name(String value) {
+    _$nameAtom.context.conditionallyRunInAction(() {
+      super.name = value;
+      _$nameAtom.reportChanged();
+    }, _$nameAtom, name: '${_$nameAtom.name}_set');
+  }
+
+  final _$lastNameAtom = Atom(name: 'ControllerBase.lastName');
+
+  @override
+  String get lastName {
+    _$lastNameAtom.context.enforceReadPolicy(_$lastNameAtom);
+    _$lastNameAtom.reportObserved();
+    return super.lastName;
+  }
+
+  @override
+  set lastName(String value) {
+    _$lastNameAtom.context.conditionallyRunInAction(() {
+      super.lastName = value;
+      _$lastNameAtom.reportChanged();
+    }, _$lastNameAtom, name: '${_$lastNameAtom.name}_set');
   }
 
   final _$ControllerBaseActionController =
       ActionController(name: 'ControllerBase');
 
   @override
-  dynamic increment() {
+  dynamic changeName(String newName) {
     final _$actionInfo = _$ControllerBaseActionController.startAction();
     try {
-      return super.increment();
+      return super.changeName(newName);
+    } finally {
+      _$ControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic changeLastName(String newLastName) {
+    final _$actionInfo = _$ControllerBaseActionController.startAction();
+    try {
+      return super.changeLastName(newLastName);
     } finally {
       _$ControllerBaseActionController.endAction(_$actionInfo);
     }
@@ -41,7 +68,7 @@ mixin _$Controller on ControllerBase, Store {
 
   @override
   String toString() {
-    final string = 'counter: ${counter.toString()}';
+    final string = 'name: ${name.toString()},lastName: ${lastName.toString()}';
     return '{$string}';
   }
 }

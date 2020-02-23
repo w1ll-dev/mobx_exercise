@@ -17,30 +17,30 @@ class MyHomePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             TextField(
-              decoration: InputDecoration(labelText: 'Nome'),
+              decoration: InputDecoration(labelText: 'Name'),
+              onChanged: (name) {
+                controller.changeName(name);
+              },
             ),
             SizedBox(
               height: 20,
             ),
             TextField(
-              decoration: InputDecoration(labelText: 'Sobrenome'),
+              decoration: InputDecoration(labelText: 'Last Name'),
+              onChanged: (lastName) {
+                controller.changeLastName(lastName);
+              },
             ),
             SizedBox(
               height: 20,
             ),
             Observer(
               builder: (_) {
-                return Text('${controller.counter}');
+                return Text('${controller.name} ${controller.lastName}');
               },
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          controller.increment();
-        },
-        child: Icon(Icons.add),
       ),
     );
   }
