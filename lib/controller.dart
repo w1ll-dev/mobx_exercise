@@ -19,4 +19,7 @@ abstract class ControllerBase with Store {
   changeLastName(String newLastName) {
     lastName = newLastName;
   }
+
+  @computed
+  String get fullName => "$name $lastName";
 }

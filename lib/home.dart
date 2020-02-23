@@ -18,25 +18,21 @@ class MyHomePage extends StatelessWidget {
           children: <Widget>[
             TextField(
               decoration: InputDecoration(labelText: 'Name'),
-              onChanged: (name) {
-                controller.changeName(name);
-              },
+              onChanged: controller.changeName,
             ),
             SizedBox(
               height: 20,
             ),
             TextField(
               decoration: InputDecoration(labelText: 'Last Name'),
-              onChanged: (lastName) {
-                controller.changeLastName(lastName);
-              },
+              onChanged: controller.changeLastName,
             ),
             SizedBox(
               height: 20,
             ),
             Observer(
               builder: (_) {
-                return Text('${controller.name} ${controller.lastName}');
+                return Text('${controller.fullName}');
               },
             ),
           ],
