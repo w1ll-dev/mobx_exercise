@@ -14,14 +14,13 @@ class MyHomePage extends StatelessWidget {
       body: Center(
         child: Observer(
           builder: (_) {
-            return Text('${controller.counter.value}');
+            return Text('${controller.counter}');
           },
         ),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           controller.increment();
-          print('clicou');
         },
         child: Icon(Icons.add),
       ),
