@@ -1,25 +1,30 @@
 import 'package:mobx/mobx.dart';
+import './models/client.dart';
 part 'controller.g.dart';
 
 class Controller = ControllerBase with _$Controller;
 
 abstract class ControllerBase with Store {
-  @observable
-  String name = '';
+  final client = Client();
 
-  @observable
-  String lastName = '';
-
-  @action
-  changeName(String newName) {
-    name = newName;
+  bool isValidate() {
+    return validateName() == null && validateEmail() == null;
   }
 
-  @action
-  changeLastName(String newLastName) {
-    lastName = newLastName;
+  String validateName() {
+    if (client.name == null) {
+      return "your name is required.";
+    } else if (client.name.length < 3) {
+      return "invalide name.";
+    }
+    return null;
   }
 
-  @computed
-  String get fullName => "$name $lastName";
+  String validateEmail() {
+    if (client.email == null) {
+      return "your email is required.";
+    } else if (!client.email.contains("@")) {
+      return "invalid email.";
+    }
+  }
 }

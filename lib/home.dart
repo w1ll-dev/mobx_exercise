@@ -7,6 +7,24 @@ class MyHomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Widget _textField(
+        {String labelText, onChanged, String Function() errorText}) {
+      return TextField(
+        onChanged: onChanged,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+          labelText: labelText,
+          errorText: errorText == null ? null : errorText(),
+        ),
+      );
+    }
+
+    Widget _sizedBox() {
+      return SizedBox(
+        height: 30,
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Exercise Mobx'),
@@ -16,25 +34,32 @@ class MyHomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            TextField(
-              decoration: InputDecoration(labelText: 'Name'),
-              onChanged: controller.changeName,
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            TextField(
-              decoration: InputDecoration(labelText: 'Last Name'),
-              onChanged: controller.changeLastName,
-            ),
-            SizedBox(
-              height: 20,
-            ),
             Observer(
               builder: (_) {
-                return Text('${controller.fullName}');
+                return _textField(
+                  labelText: "name",
+                  onChanged: controller.client.changeName,
+                  errorText: controller.validateName,
+                );
               },
             ),
+            _sizedBox(),
+            Observer(
+              builder: (_) {
+                return _textField(
+                  labelText: "email",
+                  onChanged: controller.client.changeMail,
+                  errorText: controller.validateEmail,
+                );
+              },
+            ),
+            _sizedBox(),
+            Observer(builder: (_) {
+              return RaisedButton(
+                onPressed: controller.isValidate() ? () {} : null,
+                child: Text("save"),
+              );
+            })
           ],
         ),
       ),
