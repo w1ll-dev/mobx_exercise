@@ -7,7 +7,7 @@ class Controller = ControllerBase with _$Controller;
 abstract class ControllerBase with Store {
   final client = Client();
 
-  bool isValidate() {
+  bool get isValid {
     return validateName() == null && validateEmail() == null;
   }
 
@@ -26,5 +26,6 @@ abstract class ControllerBase with Store {
     } else if (!client.email.contains("@")) {
       return "invalid email.";
     }
+    return null;
   }
 }
