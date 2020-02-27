@@ -1,29 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:mobx_exercise/controller.dart';
-import 'package:provider/provider.dart';
 
 import 'home.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  GetIt getIt = GetIt.I;
+  getIt.registerSingleton<Controller>(Controller());
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        Provider<Controller>(
-          create: (_) => Controller(),
-        ),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: MyHomePage(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      home: MyHomePage(),
     );
   }
 }
